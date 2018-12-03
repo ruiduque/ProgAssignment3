@@ -10,3 +10,6 @@ head(outcome)
 outcome[,11] <- as.numeric(outcome[,11])
 hist(outcome[,11], main = names(outcome)[11])
 
+# State analysis
+states <- unique(outcome$State)
+states    
