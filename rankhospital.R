@@ -34,25 +34,18 @@ rankhospital <- function(state, outcome, num = "best") {
                 outcome_state <- outcome_file[outcome_file$State == state,][,c(2,23)]
         
         # Convert to numeric and sort variable mortality rate... 
-        outcome_state[,2] <- as.numeric(outcome_state[,2]) 
+        outcome_state[,2] <- suppressWarnings(as.numeric(outcome_state[,2]))
         outcome_state <- outcome_state[order(outcome_state[,2], outcome_state[,1], na.last = NA),]
         
         
         ## 30-day death rate        
         index <- NULL
-        max_row <- nrow(outcome_state)
+        
         if (num == "best") index <- 1
         else if (num == "worst") {
-                index <- max_row
+                index <- nrow(outcome_state)
         }
         else index <- num
-        
-#        if (!(is.null(index))) {
-#                if (num <= max_row) {
-#                        outcome_state[num,1]
-#                }
-#                else NA
-#        }
         
         outcome_state[index,1]
 }

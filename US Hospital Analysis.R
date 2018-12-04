@@ -20,3 +20,20 @@ test_best <- function(statx) {
 }
 
 
+my_outcome <- data.frame(index = c(11,17,23), outcome = c("heart attack", "heart failure", "pneumonia"))
+
+my_outcome <- data.matrix(c("heart attack", "heart failure", "pneumonia"))
+rownames(my_outcome) <- c(11,17,23)
+
+t <- split.data.frame(outcomet[,c(2,7,11,17,23)],outcomet$State)
+head(t)
+
+# for heart attack
+ts <- lapply(split.data.frame(outcomet[,c(2,7,11,17,23)],outcomet$State), function(x) { 
+        x <- x[order(suppressWarnings(as.numeric(x[,3])), x[,1], na.last = NA),]
+        x[20,c(1,2)]
+        })
+
+
+t1  <- do.call(rbind,ts)
+class(t1)

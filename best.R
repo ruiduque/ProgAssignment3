@@ -36,7 +36,7 @@ best <- function(state, outcome) {
                 outcome_state <- outcome_file[outcome_file$State == state,][,c(2,23)]
         
         # Convert to numeric and sort variable mortality rate... 
-        outcome_state[,2] <- as.numeric(outcome_state[,2]) 
+        outcome_state[,2] <- suppressWarnings(as.numeric(outcome_state[,2]))
         outcome_state <- outcome_state[order(outcome_state[,2], outcome_state[,1], na.last = NA),]
         
         outcome_state[1,1]
